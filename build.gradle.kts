@@ -1,6 +1,9 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     id("java")
     id("application")
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "org.example"
@@ -26,5 +29,8 @@ tasks.test {
     useJUnitPlatform()
 }
 
+application{
+    mainClass.set("com.cburch.logisim.Main")
+}
 //java.sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_5
 //java.targetCompatibility = org.gradle.api.JavaVersion.VERSION_1_5
