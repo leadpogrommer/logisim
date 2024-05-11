@@ -78,6 +78,7 @@ public class Simulator {
 		
 		@Override
 		public void run() {
+			setName("Propagator");
 			while (!complete) {
 				synchronized(this) {
 					while (!complete && !propagateRequested

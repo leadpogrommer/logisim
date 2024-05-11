@@ -61,10 +61,10 @@ public class Pin extends InstanceFactory {
 	
 	public static final Pin FACTORY = new Pin();
 
-	private static final Icon ICON_IN = Icons.getIcon("pinInput.gif");
-	private static final Icon ICON_OUT = Icons.getIcon("pinOutput.gif");
-	private static final Font ICON_WIDTH_FONT = new Font("SansSerif", Font.BOLD, 9);
-	private static final Color ICON_WIDTH_COLOR = Value.WIDTH_ERROR_COLOR.darker();
+	public static final Icon ICON_IN = Icons.getIcon("pinInput.gif");
+	public static final Icon ICON_OUT = Icons.getIcon("pinOutput.gif");
+	public static final Font ICON_WIDTH_FONT = new Font("SansSerif", Font.BOLD, 9);
+	public static final Color ICON_WIDTH_COLOR = Value.WIDTH_ERROR_COLOR.darker();
 
 	public Pin() {
 		super("Pin", Strings.getter("pinComponent"));
@@ -104,7 +104,7 @@ public class Pin extends InstanceFactory {
 		}
 	}
 
-	private void paintIconBase(InstancePainter painter) {
+	public void paintIconBase(InstancePainter painter) {
 		PinAttributes attrs = (PinAttributes) painter.getAttributeSet();
 		Direction dir = attrs.facing;
 		boolean output = attrs.isOutput();
@@ -217,7 +217,7 @@ public class Pin extends InstanceFactory {
 	// methods for instances
 	//
 	@Override
-	protected void configureNewInstance(Instance instance) {
+	public void configureNewInstance(Instance instance) {
 		PinAttributes attrs = (PinAttributes) instance.getAttributeSet();
 		instance.addAttributeListener();
 		configurePorts(instance);
@@ -225,7 +225,7 @@ public class Pin extends InstanceFactory {
 	}
 	
 	@Override
-	protected void instanceAttributeChanged(Instance instance, Attribute<?> attr) {
+	public void instanceAttributeChanged(Instance instance, Attribute<?> attr) {
 		if (attr == ATTR_TYPE) {
 			configurePorts(instance);
 		} else if (attr == StdAttr.WIDTH || attr == StdAttr.FACING
@@ -236,7 +236,7 @@ public class Pin extends InstanceFactory {
 		}
 	}
 	
-	private void configurePorts(Instance instance) {
+	public void configurePorts(Instance instance) {
 		PinAttributes attrs = (PinAttributes) instance.getAttributeSet();
 		String endType = attrs.isOutput() ? Port.INPUT : Port.OUTPUT;
 		Port port = new Port(0, 0, endType, StdAttr.WIDTH);
@@ -273,7 +273,7 @@ public class Pin extends InstanceFactory {
 		}
 	}
 
-	private static Value pull2(Value mod, BitWidth expectedWidth) {
+	public static Value pull2(Value mod, BitWidth expectedWidth) {
 		if (mod.getWidth() == expectedWidth.getWidth()) {
 			Value[] vs = mod.getAll();
 			for (int i = 0; i < vs.length; i++) {
@@ -335,7 +335,7 @@ public class Pin extends InstanceFactory {
 		}
 	}
 	
-	private static PinState getState(InstanceState state) {
+	public static PinState getState(InstanceState state) {
 		PinAttributes attrs = (PinAttributes) state.getAttributeSet();
 		BitWidth width = attrs.width;
 		PinState ret = (PinState) state.getData();
@@ -359,9 +359,9 @@ public class Pin extends InstanceFactory {
 		return ret;
 	}
 
-	private static class PinState implements InstanceData, Cloneable {
-		Value sending;
-		Value receiving;
+	public static class PinState implements InstanceData, Cloneable {
+		public Value sending;
+		public Value receiving;
 		
 		public PinState(Value sending, Value receiving) {
 			this.sending = sending;
@@ -392,7 +392,7 @@ public class Pin extends InstanceFactory {
 			bitPressed = -1;
 		}
 		
-		private void handleBitPress(InstanceState state, int bit, MouseEvent e) {
+		public void handleBitPress(InstanceState state, int bit, MouseEvent e) {
 			PinAttributes attrs = (PinAttributes) state.getAttributeSet();
 			if (!attrs.isInput()) return;
 	
@@ -428,7 +428,7 @@ public class Pin extends InstanceFactory {
 			state.fireInvalidated();
 		}
 	
-		private int getBit(InstanceState state, MouseEvent e) {
+		public int getBit(InstanceState state, MouseEvent e) {
 			BitWidth width = state.getAttributeValue(StdAttr.WIDTH);
 			if (width.getWidth() == 1) {
 				return 0;
