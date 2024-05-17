@@ -152,21 +152,9 @@ class MenuSimulate extends Menu {
 	private MenuItemImpl tickOnce;
 	private JMenu tickFreq = new JMenu();
 	private TickFrequencyChoice[] tickFreqs = {
-		new TickFrequencyChoice(4096),
-		new TickFrequencyChoice(2048),
-		new TickFrequencyChoice(1024),
-		new TickFrequencyChoice(512),
-		new TickFrequencyChoice(256),
-		new TickFrequencyChoice(128),
-		new TickFrequencyChoice(64),
-		new TickFrequencyChoice(32),
-		new TickFrequencyChoice(16),
-		new TickFrequencyChoice(8),
-		new TickFrequencyChoice(4),
-		new TickFrequencyChoice(2),
-		new TickFrequencyChoice(1),
-		new TickFrequencyChoice(0.5),
-		new TickFrequencyChoice(0.25),
+			new TickFrequencyChoice(1337),
+			new TickFrequencyChoice(228),
+		new TickFrequencyChoice(22)
 	};
 	private JMenu downStateMenu = new JMenu();
 	private ArrayList<CircuitStateMenuItem> downStateItems
@@ -211,14 +199,9 @@ class MenuSimulate extends Menu {
 		add(reset);
 		add(step);
 		addSeparator();
-		add(upStateMenu);
-		add(downStateMenu);
-		addSeparator();
 		add(tickOnce);
 		add(ticksEnabled);
 		add(tickFreq);
-		addSeparator();
-		add(log);
 
 		setEnabled(false);
 		run.setEnabled(false);

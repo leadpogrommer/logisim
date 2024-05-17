@@ -57,10 +57,7 @@ public class LogisimMenuBar extends JMenuBar {
 	private class MyListener implements LocaleListener {
 		public void localeChanged() {
 			file.localeChanged();
-			edit.localeChanged();
-			project.localeChanged();
 			simulate.localeChanged();
-			help.localeChanged();
 		}
 	}
 	
@@ -73,11 +70,8 @@ public class LogisimMenuBar extends JMenuBar {
 	private ArrayList<ChangeListener> enableListeners;
 	
 	private MenuFile file;
-	private MenuEdit edit;
-	private MenuProject project;
 	private MenuSimulate simulate;
-	private MenuHelp help;
-	
+
 	public LogisimMenuBar(JFrame parent, Project proj) {
 		this.parent = parent;
 		this.listener = new MyListener();
@@ -85,11 +79,8 @@ public class LogisimMenuBar extends JMenuBar {
 		this.enableListeners = new ArrayList<ChangeListener>();
 		
 		add(file = new MenuFile(this));
-		add(edit = new MenuEdit(this));
-		add(project = new MenuProject(this));
 		add(simulate = new MenuSimulate(this));
-		add(new WindowMenu(parent));
-		add(help = new MenuHelp(this));
+
 		
 		LocaleManager.addLocaleListener(listener);
 		listener.localeChanged();

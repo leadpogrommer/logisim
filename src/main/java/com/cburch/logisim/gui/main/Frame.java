@@ -237,12 +237,12 @@ public class Frame extends LFrame implements LocaleListener {
 		attrPanel.add(attrTable, BorderLayout.CENTER);
 		attrPanel.add(zoom, BorderLayout.SOUTH);
 
-		leftRegion = new HorizontalSplitPane(explPanel, attrPanel,
-				AppPreferences.WINDOW_LEFT_SPLIT.get().doubleValue());
-		mainRegion = new VerticalSplitPane(leftRegion, mainPanelSuper,
-				AppPreferences.WINDOW_MAIN_SPLIT.get().doubleValue());
+//		leftRegion = new HorizontalSplitPane(explPanel, attrPanel,
+//				AppPreferences.WINDOW_LEFT_SPLIT.get().doubleValue());
+//		mainRegion = new VerticalSplitPane(leftRegion, mainPanelSuper,
+//				AppPreferences.WINDOW_MAIN_SPLIT.get().doubleValue());
 
-		getContentPane().add(mainRegion, BorderLayout.CENTER);
+		getContentPane().add(mainPanelSuper, BorderLayout.CENTER);
 
 		computeTitle();
 
@@ -255,7 +255,7 @@ public class Frame extends LFrame implements LocaleListener {
 		this.setExtendedState(AppPreferences.WINDOW_STATE.get().intValue());
 		
 		menuListener.register(mainPanel);
-		KeyboardToolSelection.register(toolbar);
+//		KeyboardToolSelection.register(toolbar);
 
 		proj.setFrame(this);
 		if (proj.getTool() == null) {
@@ -279,7 +279,7 @@ public class Frame extends LFrame implements LocaleListener {
 			; // don't place value anywhere
 		} else if (AppPreferences.TOOLBAR_DOWN_MIDDLE.equals(loc)) {
 			toolbar.setOrientation(Toolbar.VERTICAL);
-			mainPanelSuper.add(toolbar, BorderLayout.WEST);
+//			mainPanelSuper.add(toolbar, BorderLayout.WEST);
 		} else { // it is a BorderLayout constant
 			Object value = BorderLayout.NORTH;
 			for (Direction dir : Direction.cardinals) {
@@ -291,7 +291,7 @@ public class Frame extends LFrame implements LocaleListener {
 				}
 			}
 
-			contents.add(toolbar, value);
+//			contents.add(toolbar, value);
 			boolean vertical = value == BorderLayout.WEST || value == BorderLayout.EAST;
 			toolbar.setOrientation(vertical ? Toolbar.VERTICAL : Toolbar.HORIZONTAL);
 		}
@@ -374,16 +374,17 @@ public class Frame extends LFrame implements LocaleListener {
 	}
 
 	private void computeTitle() {
-		String s;
-		Circuit circuit = proj.getCurrentCircuit();
-		String name = proj.getLogisimFile().getName();
-		if (circuit != null) {
-			s = StringUtil.format(Strings.get("titleCircFileKnown"),
-				circuit.getName(), name);
-		} else {
-			s = StringUtil.format(Strings.get("titleFileKnown"), name);
-		}
-		this.setTitle(s);
+//		String s;
+//		Circuit circuit = proj.getCurrentCircuit();
+//		String name = proj.getLogisimFile().getName();
+//		if (circuit != null) {
+//			s = StringUtil.format(Strings.get("titleCircFileKnown"),
+//				circuit.getName(), name);
+//		} else {
+//			s = StringUtil.format(Strings.get("titleFileKnown"), name);
+//		}
+//		this.setTitle(s);
+		this.setTitle("Подарок для Сани");
 		myProjectListener.enableSave();
 	}
 	
@@ -452,8 +453,8 @@ public class Frame extends LFrame implements LocaleListener {
 		if (loc != null) {
 			AppPreferences.WINDOW_LOCATION.set(loc.x + "," + loc.y);
 		}
-		AppPreferences.WINDOW_LEFT_SPLIT.set(Double.valueOf(leftRegion.getFraction()));
-		AppPreferences.WINDOW_MAIN_SPLIT.set(Double.valueOf(mainRegion.getFraction()));
+//		AppPreferences.WINDOW_LEFT_SPLIT.set(Double.valueOf(leftRegion.getFraction()));
+//		AppPreferences.WINDOW_MAIN_SPLIT.set(Double.valueOf(mainRegion.getFraction()));
 		AppPreferences.DIALOG_DIRECTORY.set(JFileChoosers.getCurrentDirectory());
 	}
 	

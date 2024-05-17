@@ -19,6 +19,7 @@ dependencies {
         "libs/fontchooser.jar",
         "libs/jh.jar",
         "libs/MRJAdapter.jar",
+        "libs/logisim-banked-memory-0.2.0.jar",
     ))
 
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3

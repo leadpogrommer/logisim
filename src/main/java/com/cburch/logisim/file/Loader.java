@@ -297,7 +297,8 @@ public class Loader implements LibraryLoader {
 		// that it works as well. It certainly does more file accesses.
 		
 		// Anyway, here's the line for this new version:
-		ZipClassLoader loader = new ZipClassLoader(actual);
+//		ZipClassLoader loader = new ZipClassLoader(actual);
+		ClassLoader loader = this.getClass().getClassLoader();
 		
 		// And here's the code that was present up until 2.1.8, and which I
 		// know to work well except for the closing-files bit. If necessary, we

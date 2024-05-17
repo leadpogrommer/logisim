@@ -18,9 +18,9 @@ import com.cburch.logisim.util.WindowClosable;
 
 public class LFrame extends JFrame implements WindowClosable {
 	private static final String PATH = "resources/logisim/img/logisim-icon-";
-	private static final int[] SIZES = { 16, 20, 24, 48, 64, 128 };
+	private static final int[] SIZES = { 128 };
 	private static List<Image> ICONS = null;
-	private static final int DEFAULT_SIZE = 48;
+	private static final int DEFAULT_SIZE = 128;
 	private static Image DEFAULT_ICON = null;
 	
 	public static void attachIcon(Window frame) {

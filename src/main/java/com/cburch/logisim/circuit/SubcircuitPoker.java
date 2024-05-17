@@ -55,24 +55,24 @@ public class SubcircuitPoker extends InstancePoker {
 	
 	@Override
 	public void mousePressed(InstanceState state, MouseEvent e) {
-		if (isWithin(state, e)) {
-			mouseDown = true;
-			state.getInstance().fireInvalidated();
-		}
+//		if (isWithin(state, e)) {
+//			mouseDown = true;
+//			state.getInstance().fireInvalidated();
+//		}
 	}
 	
 	@Override
 	public void mouseReleased(InstanceState state, MouseEvent e) {
-		if (mouseDown) {
-			mouseDown = false;
-			Object sub = state.getData();
-			if (e.getClickCount() == 2 && isWithin(state, e)
-					&& sub instanceof CircuitState) {
-				state.getProject().setCircuitState((CircuitState) sub);
-			} else {
-				state.getInstance().fireInvalidated();
-			}
-		}
+//		if (mouseDown) {
+//			mouseDown = false;
+//			Object sub = state.getData();
+//			if (e.getClickCount() == 2 && isWithin(state, e)
+//					&& sub instanceof CircuitState) {
+//				state.getProject().setCircuitState((CircuitState) sub);
+//			} else {
+//				state.getInstance().fireInvalidated();
+//			}
+//		}
 	}
 	
 	private boolean isWithin(InstanceState state, MouseEvent e) {

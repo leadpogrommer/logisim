@@ -361,7 +361,10 @@ public class LogisimFile extends Library implements LibraryEventSource {
 
 	public static LogisimFile load(File file, Loader loader)
 			throws IOException {
-		InputStream in = new FileInputStream(file);
+//		InputStream in = new FileInputStream(file);
+		;
+//		InLogisimFilegetClassLoader().getResource(file.getName()).openStream()
+		InputStream in = loader.getClass().getClassLoader().getResource(file.getName()).openStream();
 		SAXException firstExcept = null;
 		try {
 			return loadSub(in, loader);

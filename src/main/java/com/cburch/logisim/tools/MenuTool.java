@@ -115,40 +115,40 @@ public class MenuTool extends Tool {
 
 	@Override
 	public void mousePressed(Canvas canvas, Graphics g, MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
-		Location pt = Location.create(x, y);
-
-		JPopupMenu menu;
-		Project proj = canvas.getProject();
-		Selection sel = proj.getSelection();
-		Collection<Component> in_sel = sel.getComponentsContaining(pt, g);
-		if (!in_sel.isEmpty()) {
-			Component comp = in_sel.iterator().next();
-			if (sel.getComponents().size() > 1) {
-				menu = new MenuSelection(proj);
-			} else {
-				menu = new MenuComponent(proj,
-					canvas.getCircuit(), comp);
-				MenuExtender extender = (MenuExtender) comp.getFeature(MenuExtender.class);
-				if (extender != null) extender.configureMenu(menu, proj);
-			}
-		} else {
-			Collection<Component> cl = canvas.getCircuit().getAllContaining(pt, g);
-			if (!cl.isEmpty()) {
-				Component comp = cl.iterator().next();
-				menu = new MenuComponent(proj,
-					canvas.getCircuit(), comp);
-				MenuExtender extender = (MenuExtender) comp.getFeature(MenuExtender.class);
-				if (extender != null) extender.configureMenu(menu, proj);
-			} else {
-				menu = null;
-			}
-		}
-
-		if (menu != null) {
-			canvas.showPopupMenu(menu, x, y);
-		}
+//		int x = e.getX();
+//		int y = e.getY();
+//		Location pt = Location.create(x, y);
+//
+//		JPopupMenu menu;
+//		Project proj = canvas.getProject();
+//		Selection sel = proj.getSelection();
+//		Collection<Component> in_sel = sel.getComponentsContaining(pt, g);
+//		if (!in_sel.isEmpty()) {
+//			Component comp = in_sel.iterator().next();
+//			if (sel.getComponents().size() > 1) {
+//				menu = new MenuSelection(proj);
+//			} else {
+//				menu = new MenuComponent(proj,
+//					canvas.getCircuit(), comp);
+//				MenuExtender extender = (MenuExtender) comp.getFeature(MenuExtender.class);
+//				if (extender != null) extender.configureMenu(menu, proj);
+//			}
+//		} else {
+//			Collection<Component> cl = canvas.getCircuit().getAllContaining(pt, g);
+//			if (!cl.isEmpty()) {
+//				Component comp = cl.iterator().next();
+//				menu = new MenuComponent(proj,
+//					canvas.getCircuit(), comp);
+//				MenuExtender extender = (MenuExtender) comp.getFeature(MenuExtender.class);
+//				if (extender != null) extender.configureMenu(menu, proj);
+//			} else {
+//				menu = null;
+//			}
+//		}
+//
+//		if (menu != null) {
+//			canvas.showPopupMenu(menu, x, y);
+//		}
 	}
 
 	@Override

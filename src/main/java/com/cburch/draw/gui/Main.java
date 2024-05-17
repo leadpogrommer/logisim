@@ -42,8 +42,8 @@ public class Main {
 		AttrTable table = new AttrTable(frame);
 		AttrTableDrawManager manager = new AttrTableDrawManager(canvas, table, attrs);
 		manager.attributesSelected();
-		HorizontalSplitPane west = new HorizontalSplitPane(toolbar, table, 0.5);
-		VerticalSplitPane all = new VerticalSplitPane(west, canvas, 0.3);
+//		HorizontalSplitPane west = new HorizontalSplitPane(toolbar, table, 0.5);
+		VerticalSplitPane all = new VerticalSplitPane(table, canvas, 0.3);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().add(all, BorderLayout.CENTER);

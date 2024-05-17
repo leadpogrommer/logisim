@@ -143,13 +143,15 @@ class LibraryManager {
 			}
 			return ret;
 		} else if (type.equals("file")) {
-			File toRead = loader.getFileFor(name, Loader.LOGISIM_FILTER);
+//			File toRead = loader.getFileFor(name, Loader.LOGISIM_FILTER);
+			File toRead = new File(name);
 			return loadLogisimLibrary(loader, toRead);
 		} else if (type.equals("jar")) {
 			int sepLoc = name.lastIndexOf(desc_sep);
 			String fileName = name.substring(0, sepLoc);
 			String className = name.substring(sepLoc + 1);
-			File toRead = loader.getFileFor(fileName, Loader.JAR_FILTER);
+//			File toRead = loader.getFileFor(fileName, Loader.JAR_FILTER);
+			File toRead = new File(fileName);
 			return loadJarLibrary(loader, toRead, className);
 		} else {
 			loader.showError(StringUtil.format(Strings.get("fileTypeError"),

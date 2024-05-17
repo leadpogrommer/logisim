@@ -52,12 +52,12 @@ public class SubcircuitFactory extends InstanceFactory {
 		}
 
 		public void configureMenu(JPopupMenu menu, Project proj) {
-			this.proj = proj;
-			String name = instance.getFactory().getDisplayName();
-			String text = Strings.get("subcircuitViewItem", name);
-			JMenuItem item = new JMenuItem(text);
-			item.addActionListener(this);
-			menu.add(item);
+//			this.proj = proj;
+//			String name = instance.getFactory().getDisplayName();
+//			String text = Strings.get("subcircuitViewItem", name);
+//			JMenuItem item = new JMenuItem(text);
+//			item.addActionListener(this);
+//			menu.add(item);
 		}
 
 		public void actionPerformed(ActionEvent e) {
