@@ -9,24 +9,26 @@ import java.awt.Graphics;
 import java.awt.FontMetrics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
-import javax.swing.Icon;
+import javax.swing.*;
 
-import com.cburch.logisim.circuit.Circuit;
-import com.cburch.logisim.circuit.CircuitEvent;
-import com.cburch.logisim.circuit.CircuitListener;
-import com.cburch.logisim.circuit.RadixOption;
-import com.cburch.logisim.circuit.Wire;
-import com.cburch.logisim.circuit.WireSet;
+import com.cburch.logisim.circuit.*;
 import com.cburch.logisim.comp.Component;
 import com.cburch.logisim.comp.ComponentDrawContext;
 import com.cburch.logisim.comp.ComponentUserEvent;
+import com.cburch.logisim.comp.EndData;
 import com.cburch.logisim.data.AttributeSet;
 import com.cburch.logisim.data.Location;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.gui.main.Canvas;
+import com.cburch.logisim.gui.main.NetCompModel;
+import com.cburch.logisim.gui.main.WireNetModel;
+import com.cburch.logisim.instance.Port;
+import com.cburch.logisim.instance.StdAttr;
 import com.cburch.logisim.prefs.AppPreferences;
 import com.cburch.logisim.proj.Project;
+import com.cburch.logisim.std.wiring.Tunnel;
 import com.cburch.logisim.util.Icons;
 
 public class PokeTool extends Tool {
@@ -175,6 +177,9 @@ public class PokeTool extends Tool {
 						canvas.getProject().getOptions().getAttributeSet());
 					setPokedComponent(circ, c, caret);
 					canvas.setHighlightedWires(circ.getWireSet((Wire) c));
+					var bundle = circ.wires.getWireBundle(((Wire)c).getEnd0());
+					doSomethingWithWireBundle(bundle, circ, canvas.getProject());
+//					System.out.println(bundle);
 				} else {
 					Pokable p = (Pokable) c.getFeature(Pokable.class);
 					if (p != null) {
@@ -195,6 +200,44 @@ public class PokeTool extends Tool {
 		}
 		if (dirty) canvas.getProject().repaintCanvas();
 	}
+
+	public void doSomethingWithWireBundle(WireBundle wb, Circuit circ, Project proj) {
+		var width = wb.width;
+		var tunnels = new ArrayList<NetCompModel>();
+		var drivers = new ArrayList< NetCompModel >();
+		var listeners = new ArrayList< NetCompModel >();
+		var mixed = new ArrayList< NetCompModel >();
+		for(var loc: wb.points){
+			for(var comp: circ.getComponents(loc)){
+				for(var compEnd: comp.getEnds()){
+					if(compEnd.getLocation().equals(loc)){
+//						System.out.format("Comp %s, type: %d\n", comp.getFactory().getName(), compEnd.getType());
+						var cf = comp.getFactory();
+						var et = compEnd.getType();
+						if(cf instanceof Tunnel){
+							tunnels.add(new NetCompModel(comp.getAttributeSet().getValue(StdAttr.LABEL), loc, comp));
+						}else if (cf instanceof WireFactory){
+							// do nothing
+						}else if(et == EndData.OUTPUT_ONLY){
+							drivers.add(new NetCompModel(cf.getName(), loc, comp));
+						} else if(et == EndData.INPUT_ONLY){
+							listeners.add(new NetCompModel(cf.getName(), loc, comp));
+						} else if (et == EndData.INPUT_OUTPUT){
+							mixed.add(new NetCompModel(cf.getName(), loc, comp));
+						} else {
+							System.out.println("Unknown End Type: " + et);
+						}
+					}
+				}
+			}
+
+		}
+		proj.frame.showNetPane(new WireNetModel(tunnels, drivers, listeners, mixed, circ));
+	}
+
+//	class NetPanel extends JPanel {
+//
+//	}
 
 	@Override
 	public void mouseDragged(Canvas canvas, Graphics g, MouseEvent e) {

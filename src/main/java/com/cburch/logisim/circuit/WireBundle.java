@@ -8,13 +8,13 @@ import com.cburch.logisim.data.Location;
 import com.cburch.logisim.data.Value;
 import com.cburch.logisim.util.SmallSet;
 
-class WireBundle {
-	private BitWidth width = BitWidth.UNKNOWN;
-	private Value pullValue = Value.UNKNOWN;
-	private WireBundle parent;
-	private Location widthDeterminant = null;
-	WireThread[] threads = null;
-	SmallSet<Location> points = new SmallSet<Location>(); // points bundle hits
+public class WireBundle {
+	public BitWidth width = BitWidth.UNKNOWN;
+	public Value pullValue = Value.UNKNOWN;
+	public WireBundle parent;
+	public Location widthDeterminant = null;
+	public  WireThread[] threads = null;
+	public SmallSet<Location> points = new SmallSet<Location>(); // points bundle hits
 	private WidthIncompatibilityData incompatibilityData = null;
 
 	WireBundle() {

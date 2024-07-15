@@ -31,7 +31,7 @@ import com.cburch.logisim.util.GraphicsUtil;
 import com.cburch.logisim.util.IteratorUtil;
 import com.cburch.logisim.util.SmallSet;
 
-class CircuitWires {
+public class CircuitWires {
 	static class SplitterData {
 		WireBundle[] end_bundle; // PointData associated with each end
 
@@ -211,7 +211,7 @@ class CircuitWires {
 		return bds;
 	}
 	
-	WireBundle getWireBundle(Location query) {
+	public WireBundle getWireBundle(Location query) {
 		BundleMap bmap = getBundleMap();
 		return bmap.getBundleAt(query);
 	}

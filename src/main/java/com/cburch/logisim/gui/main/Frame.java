@@ -3,25 +3,13 @@
 
 package com.cburch.logisim.gui.main;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.IllegalComponentStateException;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -157,6 +145,8 @@ public class Frame extends LFrame implements LocaleListener {
 	private Toolbar         toolbar;
 	private HorizontalSplitPane leftRegion;
 	private VerticalSplitPane mainRegion;
+	private VerticalSplitPane realMainPanelSuper;
+	private WirePanel		wirePanel;
 	private JPanel          mainPanelSuper;
 	private CardPanel       mainPanel;
 	// left-side elements
@@ -237,9 +227,15 @@ public class Frame extends LFrame implements LocaleListener {
 		attrPanel.add(attrTable, BorderLayout.CENTER);
 		attrPanel.add(zoom, BorderLayout.SOUTH);
 
+		wirePanel = new WirePanel(this);
+		var rightRegion = new JScrollPane(wirePanel);
+
 		leftRegion = new HorizontalSplitPane(explPanel, attrPanel,
 				AppPreferences.WINDOW_LEFT_SPLIT.get().doubleValue());
-		mainRegion = new VerticalSplitPane(leftRegion, mainPanelSuper,
+
+		realMainPanelSuper = new VerticalSplitPane(mainPanelSuper, rightRegion, 1.0);
+
+		mainRegion = new VerticalSplitPane(leftRegion, realMainPanelSuper,
 				AppPreferences.WINDOW_MAIN_SPLIT.get().doubleValue());
 
 		getContentPane().add(mainRegion, BorderLayout.CENTER);
@@ -542,5 +538,14 @@ public class Frame extends LFrame implements LocaleListener {
 			}
 		}
 		return false;
+	}
+
+	public void showNetPane(WireNetModel m){
+		realMainPanelSuper.setFraction(0.8);
+		wirePanel.setLayout(m);
+
+	}
+	public void closeNetPane(){
+		realMainPanelSuper.setFraction(1.0);
 	}
 }

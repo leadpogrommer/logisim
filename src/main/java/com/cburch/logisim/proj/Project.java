@@ -76,7 +76,7 @@ public class Project {
 	private CircuitState circuitState;
 	private HashMap<Circuit,CircuitState> stateMap
 		= new HashMap<Circuit,CircuitState>();
-	private Frame frame = null;
+	public Frame frame = null;
 	private OptionsFrame optionsFrame = null;
 	private LogFrame logFrame = null;
 	private Tool tool = null;

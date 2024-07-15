@@ -108,7 +108,7 @@ public class Circuit {
 	private EventSourceWeakSupport<CircuitListener> listeners
 		= new EventSourceWeakSupport<CircuitListener>();
 	private HashSet<Component> comps = new HashSet<Component>(); // doesn't include wires
-	CircuitWires wires = new CircuitWires();
+	public CircuitWires wires = new CircuitWires();
 		// wires is package-protected for CircuitState and Analyze only.
 	private ArrayList<Component> clocks = new ArrayList<Component>();
 	private CircuitLocker locker;

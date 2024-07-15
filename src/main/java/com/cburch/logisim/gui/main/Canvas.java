@@ -357,7 +357,7 @@ public class Canvas extends JPanel
 		}
 	}
 
-	private class MyViewport extends JViewport {
+	public class MyViewport extends JViewport {
 		StringGetter errorMessage = null;
 		Color errorColor = DEFAULT_ERROR_COLOR;
 		String widthMessage = null;
@@ -512,7 +512,7 @@ public class Canvas extends JPanel
 	private CanvasPane canvasPane;
 	private Bounds oldPreferredSize;
 	private MyListener myListener = new MyListener();
-	private MyViewport viewport = new MyViewport();
+	public MyViewport viewport = new MyViewport();
 	private MyProjectListener myProjectListener = new MyProjectListener();
 	private TickCounter tickCounter;
 
